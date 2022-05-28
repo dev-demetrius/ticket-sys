@@ -1,6 +1,11 @@
 <?php
 
+  session_start();
+
+
+
   include 'connection.inc.php';
+
   include 'functions.php';
 
   
@@ -19,21 +24,25 @@
       if($result) {
         if($result && mysqli_num_rows($result) > 0) {
           $user_data = mysqli_fetch_assoc($result);
+          print_r($user_data);
           
-          if ($user_data['password'] === $password) {
+          if ($user_data['pwd'] === $password) {
 
             $_SESSION['id'] = $user_data['id'];
-
-            header("Location: ../index.php");
+            $_SESSION['name'] = $user_data['name'];
+            
+            header("Location: ../profile.php");
             die();
 
+          } else {
+
+            echo "Invalid Username or Password";
+      
           }
         }
+      } else {
+        echo "Request Failed!";
       }
-      echo "Invalid Username or Password";
-    } else {
-
-      echo "Invalid Username or Password";
-
-    }
+      
+    } 
   }

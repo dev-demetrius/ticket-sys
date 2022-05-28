@@ -2,9 +2,15 @@
 
   session_start();
 
-    include("includes/functions.php");
-    include("includes/login.inc.php");
+  
 
+  
+
+    include("includes/functions.php");
+
+    $user_info = check_login($conn);
+    
+    print_r($user_info);
    
 
 ?>
@@ -25,7 +31,7 @@
   </header>
 
   <div class="container"> 
-    <form class="login-form" action="" method="POST">
+    <form class="login-form" action="includes/login.inc.php" method="POST">
 
       <input class="first" type="text" name="user_name" placeholder="Username"><br>
       <input type="password" name="password" placeholder="Password"><br>
@@ -34,6 +40,11 @@
 
       <a href="signup.php">Signup</a>
     </form>
+
+    <?php
+      echo $_SESSION['username'];
+
+    ?>
   </div>
   <h4 class="copyright mobile">
         Copyright © 2355 All Alien Rights Reserved

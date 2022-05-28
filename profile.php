@@ -3,7 +3,10 @@
   session_start();
 
   include 'includes/connection.inc.php';
-  include 'includes/tickets.inc.php';
+  include 'includes/functions.php';
+
+  $user_data = check_login($conn);
+  $tickets = get_tickets($conn);
 
 
 
@@ -24,7 +27,7 @@
     if($user_data['id'] == $tickets['id']) {
 
         foreach($tickets as $x) {
-          echo "<p>'.$x.'</p>";
+          echo "<p>$x</p>";
         }
 
     }

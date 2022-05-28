@@ -2,6 +2,7 @@
 
 include 'connection.inc.php';
 
+
 function check_login($conn) {
 
   if(isset($_SESSION['id'])) {
@@ -18,35 +19,18 @@ function check_login($conn) {
   }
 }
 
-//login authentication
+function get_tickets($conn) {
 
-if($_SERVER['REQUEST_METHOD'] == "POST") {
-  $user_name = $_POST['user_name'];
-  $password = $_POST['password'];
+  if(isset($_SESSION['id'])) {
+    $id = $_SESSION['id'];
+    $query = "select * from tickets where assigned_to ='$id'";
 
-  if(!empty($user_name) && !empty($password) && !is_numeric($user_name)) {
-     
-     $query = "select * from users where user_name = '$user_name' limit 1";
-     $result = mysqli_query($conn, $query);
+    $result = mysqli_query($conn, $query);
+    if($result && mysqli_num_rows($result) > 0) {
 
-     if($result) {
-       if($result && mysqli_num_rows($result) > 0) {
-         $user_data = mysqli_fetch_assoc($result);
-         
-         if ($user_data['password'] === $password) {
+      $tickets = mysqli_fetch_assoc($result);
+      return $tickets;
 
-           $_SESSION['id'] = $user_data['id'];
-
-           header("Location: index.php");
-           die();
-
-         }
-       }
-     }
-     echo "Invalid Username or Password";
-  } else {
-
-     echo "Invalid Username or Password";
-
+    }
   }
 }
