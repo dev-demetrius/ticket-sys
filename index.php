@@ -1,7 +1,11 @@
 <?php
 
-  include 'includes/connection.php';
+  session_start();
 
+  include 'includes/connection.inc.php';
+
+  header("Location: login.php");
+  $_SESSION['isAdmin'] = $user_data['isAdmin'];
 ?>
 
 <!DOCTYPE html>

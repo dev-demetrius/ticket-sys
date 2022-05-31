@@ -1,5 +1,5 @@
 create table users (
-	  id int(11) not null PRIMARY KEY AUTO_INCREMENT,
+	id int(11) not null PRIMARY KEY AUTO_INCREMENT,
     name varchar(26) not null,
     email varchar(56) not null,
     uid varchar(26) not null,

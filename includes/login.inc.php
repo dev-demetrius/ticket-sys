@@ -2,6 +2,11 @@
 
   session_start();
 
+  $_SESSION['loggedin'] = true;
+  $_SESSION['isAdmin'] = $user_data['isAdmin'];
+  $_SESSION['name'] = $user_data['name'];
+  $_SESSION['id'] = $user_data['id'];
+
 
 
   include 'connection.inc.php';
@@ -31,7 +36,7 @@
             $_SESSION['id'] = $user_data['id'];
             $_SESSION['name'] = $user_data['name'];
             
-            header("Location: ../profile.php");
+            header("Location: ../profile.php?login=success");
             die();
 
           } else {
