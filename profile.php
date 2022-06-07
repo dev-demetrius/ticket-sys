@@ -1,108 +1,70 @@
 <?php
 
-  session_start();
+session_start();
 
-  
+include_once 'includes/functions.php';
 
-  include 'includes/connection.inc.php';
-  include 'includes/functions.php';
+$user = check_login($conn);
 
-  $user_data = check_login($conn);
-  $tickets = get_tickets($conn);
-  $users = get_usernames($conn);
-  $result = get_usernames($conn);
-
-
-
-  $_SESSION['isAdmin'] = $user_data['isAdmin'];
-  $_SESSION['name'] = $user_data['name'];
-  $_SESSION['id'] = $user_data['id'];
-
-  
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-
-  <title>Profile</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <title>Document</title>
 </head>
+
 <body>
 
-  <?php include 'includes/header.php'; ?>
+  <body class="d-flex-inline-flex overflow-hidden">
 
-  <?php
+    <?php include "includes/header.php"; ?>
 
-    if(!$_SESSION['isAdmin']) {
+    <div class="container-fluid vh-100">
 
-      function forLoop($array){
-        foreach ($array as $row) {
-            if(is_array($row)){
-                forLoop($row);
-            }
-            else{
-                echo $row;
-                echo "<br>";
-            }
-        }
-    }
-    
-    forLoop($tickets);
+      <div class="row">
 
-      
-    } else {
-    
-      function forLoop($array){
-        foreach ($array as $row) {
-            if(is_array($row)){
-                forLoop($row);
-            }
-            else{
-                echo $row;
-                echo "<br>";
-            }
-        }
-    }
-    
-    forLoop($tickets);
-    }
+        <?php include "includes/side-nav.php"; ?>
+        <div class="col-9 offset-3" id="main">
 
-  ?>
 
-  <form action="includes/tickets.inc.php" method="post">
-    <select name="priority" id="">
-      <option value="">Choose Priority</option>
-      <option value="high">High</option>
-      <option value="medium">Medium</option>
-      <option value="low">Low</option>
-    </select>
-    
-    <select name="users" style="">
-      <option value="">Assign To</option>
-      <?php
+          <form class="me-3 w-75" action="" method="get">
 
-        
+            <div class="d-sm-flex flex-column mt-5">
+              <div class="input-group m-3">
+                <span class="input-group-text">Name</span>
+                <input type="text" aria-label="First name" class="form-control" value="<?php echo $user['name'] ?>">
+              </div>
+              <label class="visually-hidden" for="autoSizingInputGroup">Username</label>
+              <div class="input-group m-3">
+                <div class="input-group-text">@</div>
+                <input type="text" aria-label="First name" class="form-control" value="<?php echo $user['email'] ?>">
+              </div>
 
-        foreach($users as $user) {
-          
-            echo '<option value="'. $user[0] .'">'. $user[1] .'</option>';
-    
-        }
+              <div class="input-group m-3">
+                <span class="input-group-text">Pwd</span>
+                <input type="text" aria-label="First name" class="form-control" value="<?php echo $user['pwd'] ?>">
+              </div>
+              <button class="btn btn-primary w-50 m-3">Save Changes</button>
+            </div>
+          </form>
 
-      ?>
-    </select>
-    <br>
-    <input type="text" name="subject" placeholder="Subject">
-    <br>
-    <textarea name="content" cols="60" rows="10" ></textarea>
-    <br>
-    <button type="submit">Submit</button>
 
-  </form>
-  
-</body>
+        </div>
+      </div>
+    </div>
+
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+  </script>
+
 </html>
