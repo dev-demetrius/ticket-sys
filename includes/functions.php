@@ -29,7 +29,7 @@ function check_login($conn) {
 function get_tickets($conn) {
   $id = $_SESSION['id'];
 
-  if ($_SESSION["isAdmin"] == 0) {
+  if ($_SESSION["isAdmin"] == 1) {
     $query = "select * from tickets where assigned_to ='$id'";
     $result = mysqli_query($conn, $query);
 

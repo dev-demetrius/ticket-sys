@@ -41,7 +41,7 @@ $user_info = check_login($conn);
 
       <input class="btn btn-primary mt-2 mb-4 me-2" type="submit" value="Login">
 
-      <a class="" href="signup.php">Signup</a>
+      <a class="" href="./signup.php">Signup</a>
     </form>
 
 

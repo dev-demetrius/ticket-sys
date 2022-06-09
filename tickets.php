@@ -6,7 +6,7 @@ include_once "includes/connection.inc.php";
 include_once "includes/functions.php";
 
 
-
+$user_data = check_login($conn);
 $tickets = get_tickets($conn);
 $users = get_usernames($conn);
 
