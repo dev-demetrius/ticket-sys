@@ -1,0 +1,48 @@
+#login {
+    width: 60%;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+#ticket:hover {
+    background-color: hsl(0, 0%, 26%);
+}
+
+@media (min-width: 650px) {
+    #btn {
+        max-width: 30%;
+    }
+
+    #tabs {
+        display: none;
+    }
+}
+
+@media (min-width: 1050px) {
+    #login {
+        max-width: 600px;
+        min-height: 400px;
+    }
+}
+
+@media (max-width: 650px) {
+    #side {
+        display: none;
+    }
+
+    #content {
+        width: 90%;
+        margin-left: -1em !important;
+        margin-top: 4em !important;
+    }
+    #content-tickets {
+        width: 90%;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        margin-top: auto !important;
+    }
+
+    #login {
+        width: 80%;
+    }
+}

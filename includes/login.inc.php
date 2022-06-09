@@ -28,14 +28,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $user_data = mysqli_fetch_assoc($result);
         print_r($user_data);
 
-        if ($user_data["pwd"] === $password) {
+        if ($user_data['uid'] == $user_name && $user_data["pwd"] === $password) {
           $_SESSION["id"] = $user_data["id"];
           $_SESSION["name"] = $user_data["name"];
 
           header("Location: ../profile.php?login=success");
           die();
         } else {
+          header("Location: ../login.php?login=failed");
           echo "Invalid Username or Password";
+          die;
         }
       }
     } else {

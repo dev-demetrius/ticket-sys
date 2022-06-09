@@ -8,8 +8,7 @@ $user_data = check_login($conn);
 
 
 
-$_SESSION["isAdmin"] = $user_data["isAdmin"];
-$_SESSION["id"] = $user_data["id"];
+
 
 
 
@@ -62,32 +61,37 @@ function printResults($tickets) {
 
     $id = $ticket['id'];
 
-    if ($ticket["priority"] == "high") {
+    if ($ticket['priority'] == "high") {
       $priority_color = "border-start border-danger";
-    } else {
+    } else if ($ticket['priority'] == "medium") {
       $priority_color = "border-start border-warning";
+    } else if ($ticket['priority'] == "low") {
+      $priority_color = "border-start border-info";
+    } else if ($ticket['status'] == "closed") {
+      $priority_color = "border-start border-dark";
     }
 
-    echo
-    '
-      <div class="container border border-light border-2 text-center mt-2 p-4" >
+    if ($ticket['status'] == "open") {
+      echo
+      '
+      <div id="ticket" class="ticket container border border-light border-2 shadow-lg p-3 mb-5 bg-body rounded text-center mt-2 p-4" >
       
       <a href="ticket-form.php?view=' . $id . '""  >
       
       
                                     <div class="' .
-      $priority_color .
-      ' text-start w-100 mt-auto ps-4 border-5"  >
+        $priority_color .
+        ' text-start w-100 mt-auto ps-4 border-5"  >
       
                                         <p>' .
-      $ticket["subject"] .
-      '</p>
+        $ticket["subject"] .
+        '</p>
                                         <p>' .
-      $ticket["content"] .
-      '</p>
+        $ticket["content"] .
+        '</p>
                                         <p>' .
-      $ticket["post_date"] .
-      '</p>
+        $ticket["post_date"] .
+        '</p>
       
                                     </div>
                                   </a>
@@ -96,6 +100,7 @@ function printResults($tickets) {
     
             
                           ';
+    }
   }
 }
 

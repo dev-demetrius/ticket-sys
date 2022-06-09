@@ -1,7 +1,9 @@
-function doSomething() {
-    const data = document.querySelector(".test");
-    console.log(data);
-    data.innerhtml = "this dick";
-}
+const triggerTabList = document.querySelectorAll(".nav-item");
+triggerTabList.forEach((triggerEl) => {
+    const tabTrigger = new bootstrap.Tab(triggerEl);
 
-doSomething();
+    triggerEl.addEventListener("click", (event) => {
+        event.preventDefault();
+        tabTrigger.show();
+    });
+});

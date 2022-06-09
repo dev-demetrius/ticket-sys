@@ -1,5 +1,5 @@
-<div class="col-2 px-1 bg-dark position-fixed vh-100" id="sticky-sidebar">
-  <div class="sticky-top">
+<div id="side" class="col-2 p-1 bg-dark position-absolute text-sm-start vh-100">
+  <div class="">
     <div class="d-flex justify-content-center">
       <button class="btn btn-primary mt-1" data-bs-toggle="modal" data-bs-target="#modal"
         action="includes/tickets.inc.php" method="Get">
@@ -15,3 +15,19 @@
 
   </div>
 </div>
+
+<ul id="tabs" class="nav nav-tabs">
+  <li class="nav-item">
+    <button class="nav-link active" aria-current="page" data-bs-toggle="modal" data-bs-target="#modal"
+      action="includes/tickets.inc.php" method="Get">Add Tickets</button>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="profile.php">Profile</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="tickets.php">Tickets</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link disabled">Disabled</a>
+  </li>
+</ul>
