@@ -6,7 +6,7 @@
         <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form class="m-2" action="includes/tickets.inc.php" method="GET">
+        <form class="m-2" action="includes/tickets.inc.php" method="POST">
           <select class="form-select form-select-lg mb-3" name="priority" aria-label=".form-select-lg example">
             <option value="">Choose Priority</option>
             <option value="high">High</option>

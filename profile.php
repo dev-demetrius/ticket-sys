@@ -5,6 +5,15 @@ include_once 'includes/functions.php';
 
 
 $user = check_login($conn);
+$users = get_usernames($conn);
+
+$_SESSION["loggedin"] = true;
+$_SESSION["isAdmin"] = $user_data["isAdmin"];
+$_SESSION["name"] = $user_data["name"];
+$_SESSION["id"] = $user_data["id"];
+
+print_r($_SESSION['id']);
+
 
 
 ?>

@@ -1,20 +1,3 @@
-<?php
-
-
-
-
-
-
-
-include("includes/functions.php");
-
-$user_info = check_login($conn);
-
-
-
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 

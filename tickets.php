@@ -10,9 +10,11 @@ $user_data = check_login($conn);
 $tickets = get_tickets($conn);
 $users = get_usernames($conn);
 
-$_SESSION["isAdmin"] = $user_data["isAdmin"];
-$_SESSION["name"] = $user_data["name"];
-$_SESSION["id"] = $user_data["id"];
+
+
+print_r($_SESSION['id']);
+print_r($_SESSION['name']);
+
 ?>
 
 <!DOCTYPE html>
@@ -47,7 +49,7 @@ $_SESSION["id"] = $user_data["id"];
     </div>
   </div>
 
-  <?php include 'includes/ticket-modal.php '; ?>
+  <?php include 'includes/ticket-modal.php'; ?>
 
 
   <script src="assets/js/index.js"></script>

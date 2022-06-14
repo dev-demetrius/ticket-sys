@@ -2,16 +2,13 @@
 
 session_start();
 
-include "connection.inc.php";
+include_once "connection.inc.php";
 
-include "functions.php";
+include_once "functions.php";
 
 $user_data = check_login($conn);
 
-$_SESSION["loggedin"] = true;
-$_SESSION["isAdmin"] = $user_data["isAdmin"];
-$_SESSION["name"] = $user_data["name"];
-$_SESSION["id"] = $user_data["id"];
+
 
 //login authentication
 
