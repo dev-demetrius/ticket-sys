@@ -17,7 +17,7 @@
             <option value="">Assign To</option>
             <?php
             foreach ($users as $user) {
-              echo '<option value="' . $user[0] . '">' . $user[1] . '</option>';
+              echo '<option value="' . $user['name'] . '">' . $user['name'] . '</option>';
             }
             ?>
 

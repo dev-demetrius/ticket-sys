@@ -1,28 +1,29 @@
 <?php
 
 session_start();
+include 'includes/connection.inc.php';
 include 'includes/functions.php';
 
-
-$id = $_GET['view'];
+$ticket_id = $_GET['view'];
 $_SESSION['view'] = $_GET['view'];
-$_SESSION['ticket'] = $id;
+$_SESSION['ticket'] = $ticket_id;
 
-function edit_tickets($conn, $id) {
-  if (isset($_SESSION)) {
-    $query = "select * from tickets where id ='$id'";
-    $result = mysqli_query($conn, $query);
-
-    if ($result && mysqli_num_rows($result) > 0) {
-      $tickets = mysqli_fetch_all($result, MYSQLI_ASSOC);
-      return $tickets;
-    }
-  }
-}
-
-
-$ticket = edit_tickets($conn, $id);
+$ticket = edit_tickets($conn, $ticket_id);
 $users = get_usernames($conn);
+
+
+
+
+print_r($ticket);
+print_r($_SESSION['name']);
+
+
+
+
+
+
+
+
 
 
 
@@ -50,22 +51,22 @@ $users = get_usernames($conn);
   <?php include 'includes/header.php'; ?>
   <?php include 'includes/side-nav.php'; ?>
   <div class="col-10 offset-2">
-    <form id="content" class="d-flex flex-column justify-content-center me-4 p-2" action="includes/tickets.inc.php"
-      method="GET">
+    <form id="content" class="d-flex flex-column justify-content-center me-4 p-2" method="GET"
+      action="includes/tickets.inc.php">
       <h2 class="ps-2">Edit Ticket</h2>
       <div class=" d-flex justify-content-start align-items-center">
         <div class="d-flex justify-content-start align-items-center">
           <select class="form-control m-2" name="priority" id="">
-            <option value="<?php echo $ticket[0]['priority']; ?>"><?php echo $ticket[0]['priority']; ?></option>
+            <option value="<?php echo $ticket['priority']; ?>"><?php echo $ticket['priority']; ?></option>
             <option value="high">High</option>
             <option value="medium">Medium</option>
             <option value="low">Low</option>
           </select>
           <select class="form-control m-2" name="assign">
-            <option value="">Assign To</option>
+            <option value="<?php echo $ticket['assigned_to'] ?>"><?php echo $ticket['assigned_to'] ?></option>
             <?php
             foreach ($users as $user) {
-              echo '<option value="' . $user[0] . '">' . $user[1] . '</option>';
+              echo '<option value="' . $user['name'] . '">' . $user['name'] . '</option>';
             }
             ?>
           </select>
@@ -73,15 +74,14 @@ $users = get_usernames($conn);
         </div>
       </div>
       <input class="form-control m-2" type="text" name="subject" placeholder=""
-        value="<?php echo $ticket[0]['subject']; ?>">
+        value="<?php echo $ticket['subject']; ?>">
 
       <br>
-      <textarea class="form-control m-2" name="content" cols="60"
-        rows="10"><?php echo $ticket[0]['content']; ?></textarea>
+      <textarea class="form-control m-2" name="content" cols="60" rows="10"><?php echo $ticket['content']; ?></textarea>
       <br>
       <button id="btn" class="btn btn-primary m-2" type="submit">Submit</button>
       <?php
-      if ($ticket[0]['status'] == "open") {
+      if ($ticket['status'] == "open") {
         echo '      <button id="btn" class="btn btn-danger m-2" type="submit" name="close_ticket" value="close">Close Ticket</button>
         ';
       }

@@ -5,7 +5,12 @@ date_default_timezone_set("EST");
 include_once "connection.inc.php";
 $user_data = check_login($conn);
 $tickets = get_tickets($conn);
+
 $_SESSION["isAdmin"] = $user_data["isAdmin"];
+
+
+
+
 
 
 
@@ -30,9 +35,9 @@ function check_login($conn) {
 
 function get_tickets($conn) {
   if (isset($_SESSION)) {
-    $id = $_SESSION['id'];
+    $name = $_SESSION['name'];
     if ($_SESSION['isAdmin'] == 0) {
-      $query = "select * from tickets where assigned_to ='$id'";
+      $query = "select * from tickets where assigned_to ='$name'";
       $result = mysqli_query($conn, $query);
 
       if ($result && mysqli_num_rows($result) > 0) {
@@ -115,12 +120,24 @@ function printResults($tickets) {
 
 
 function get_usernames($conn) {
-  $query = "select id, name from users";
+  $query = "select id, name, email from users";
 
   $result = mysqli_query($conn, $query);
   if ($result && mysqli_num_rows($result) > 0) {
-    $users = mysqli_fetch_all($result);
+    $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
     return $users;
+  }
+}
+
+function edit_tickets($conn, $ticket_id) {
+  if (isset($_SESSION)) {
+    $query = "select * from tickets where id ='$ticket_id'";
+    $result = mysqli_query($conn, $query);
+
+    if ($result && mysqli_num_rows($result) > 0) {
+      $tickets = mysqli_fetch_assoc($result);
+      return $tickets;
+    }
   }
 }
