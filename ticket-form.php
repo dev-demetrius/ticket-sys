@@ -14,6 +14,8 @@ $users = get_usernames($conn);
 
 
 
+
+
 print_r($ticket);
 print_r($_SESSION['name']);
 

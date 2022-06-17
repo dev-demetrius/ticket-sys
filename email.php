@@ -1,4 +1,6 @@
 <?php
+
+include_once 'includes/functions.php';
 //Import PHPMailer classes into the global namespace
 //These must be at the top of your script, not inside a function
 use PHPMailer\PHPMailer\PHPMailer;
@@ -7,6 +9,8 @@ use PHPMailer\PHPMailer\Exception;
 
 //Load Composer's autoloader
 require './vendor/autoload.php';
+
+$mailTo = emailNotification($conn, $recipient);
 
 //Create an instance; passing `true` enables exceptions
 $mail = new PHPMailer(true);
@@ -24,7 +28,7 @@ try {
 
   //Recipients
   $mail->setFrom('dem.jackson@yahoo.com', 'Mailer');
-  $mail->addAddress($user_data['email'], 'Test');     //Add a recipient               //Name is optional
+  $mail->addAddress($mailTo, 'Test');     //Add a recipient               //Name is optional
   $mail->addReplyTo('dem.jackson@yahoo.com', 'Information');
   $mail->addCC('dem.jackson@yahoo.com');
 
@@ -35,8 +39,8 @@ try {
 
   //Content
   $mail->isHTML(true);                                  //Set email format to HTML
-  $mail->Subject = 'Here is the subject';
-  $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
+  $mail->Subject = $subject;
+  $mail->Body    = $content;
   $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
   $mail->send();

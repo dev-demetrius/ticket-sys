@@ -116,6 +116,17 @@ function printResults($tickets) {
   }
 }
 
+function emailNotification($conn, $recipient) {
+  $query = "select tickets.assigned_to, users.* FROM tickets, users where tickets.assigned_to = '$recipient'";
+
+  $result = mysqli_query($conn, $query);
+  if ($result && mysqli_num_rows($result) > 0) {
+    $mailTo = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+    return $mailTo;
+  }
+}
+
 
 
 
