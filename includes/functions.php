@@ -92,15 +92,10 @@ function printResults($tickets) {
           $priority_color .
           ' text-start w-100 mt-auto ps-4 border-5"  >
         
-                                          <p>' .
-          $ticket["subject"] .
-          '</p>
-                                          <p>' .
-          $ticket["content"] .
-          '</p>
-                                          <p>' .
-          $ticket["post_date"] .
-          '</p>
+                                          <div id="ticket-item" class="d-flex"><strong>Subject</strong> &nbsp  ' . $ticket['subject'] . '</div>
+                                          <div id="ticket-item" class="d-flex"><strong>Content</strong> &nbsp ' . $ticket['content'] . '</div>
+                                          <div id="ticket-item" class="d-flex"><strong>Date Created</strong> &nbsp ' . $ticket['post_date'] . '</div>
+                                          <div id="ticket-item" class="d-flex"><strong>Created By</strong> &nbsp ' . $ticket['assigned_to'] . '</div>
         
                                       </div>
                                     </a>

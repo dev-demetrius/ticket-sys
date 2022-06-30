@@ -8,6 +8,10 @@
     background-color: hsl(0, 0%, 26%);
 }
 
+#ticket a:link {
+    text-decoration: none !important;
+}
+
 @media (min-width: 650px) {
     #btn {
         max-width: 30%;
